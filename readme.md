@@ -33,3 +33,26 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 Clona el repositorio y ejecuta:
 ```bash
 pip install -r requirements.txt
+
+## b. Manejo de Seguridad
+
+La arquitectura de seguridad del proyecto se basa en tres pilares para cumplir con los requerimientos académicos y las mejores prácticas de ingeniería de datos:
+
+### 1. Almacenamiento de Credenciales (Segregación)
+* **Separación de Código y Configuración:** Las credenciales de base de datos **NO** están expuestas dentro del código fuente (`main.py` o `app.py`).
+* **Archivo de Configuración Excluido:** Se utiliza un archivo `config.yaml` externo para la conexión. Este archivo está incluido en el `.gitignore`, asegurando que **nunca se suba al repositorio público**.
+* **Plantilla Segura:** En el repositorio se incluye un archivo `config.example.yaml` con credenciales ficticias para guiar la instalación sin comprometer la seguridad.
+
+### 2. Control de Acceso Basado en Roles (RBAC)
+El sistema implementa una capa de autenticación simulada en el Frontend (`app.py`) para restringir operaciones críticas según el perfil del usuario:
+
+| Rol | Permisos | Contraseña (Demo) |
+| :--- | :--- | :--- |
+| **Invitado** | Solo lectura (Ver gráficas y logs de auditoría). | *N/A* |
+| **Operador** | Ejecución de Carga Incremental (Delta) y Modo Ensayo. | `ABD123` |
+| **Dev (Admin)** | Control Total, incluyendo Carga Completa (Truncate) y reinicio de estado. | `ABD123` |
+
+### 3. Trazabilidad y Auditoría
+Cada operación genera un `execution_id` único (UUID) que garantiza el no repudio de las acciones. Este ID queda registrado en una **doble bitácora**:
+* **Local:** Archivo `logs_historial.json` para consulta inmediata.
+* **Remota:** Tabla inmutable `auditoria_logs` en PostgreSQL para análisis forense.
