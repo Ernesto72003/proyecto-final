@@ -29,10 +29,7 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 * **PostgreSQL** (Local o Supabase).
 * **Docker Desktop** (Opcional, si se desea contenedorizar se recomienda esta opción como prioridad).
 
-### 2. Instalación de Dependencias
-Clona el repositorio y ejecuta:
-```bash
-pip install -r requirements.txt
+
 
 ```md
 ## 🛡️ b. Manejo de Seguridad
