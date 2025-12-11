@@ -32,8 +32,7 @@ Esta es la fomra recomendada para mover el ETL a QA o Producción, ya que esto n
 Asegura que el entorno de ejecución sea identico en cualquier servidor.
 
 ### Instlación de docker
-Antes de cualquier cosa instalaremos docker desde internet en la siguiente liga https://www.google.com/search?client=opera&q=docker&sourceid=opera&ie=UTF-8&oe=UTF-8&sei=p1A7aZLoEaGnqtsP54vf2As
-para usar el docker que necesitaremos mas adaelante.
+Antes de cualquier cosa instalaremos docker desde internet en la siguiente liga https://www.google.com/search?client=opera&q=docker&sourceid=opera&ie=UTF-8&oe=UTF-8&sei=p1A7aZLoEaGnqtsP54vf2As para usar el docker que necesitaremos mas adaelante.
 
 Empecemos con lo primeero que tenemos que crear una carpeta donde tenemos que clonar algunos archivos especificos de nuestro repositorio de github, los cuales son:
 ### 1. app.py
@@ -79,6 +78,19 @@ A partir de aquí, el profesor puede verificar todos los requisitos desde la int
 5. Inspector: Verificar que los datos en DESTINO están enmascarados (Requisito 2).
 
 6. Auditoría: Verificar que los logs se guardan correctamente (Requisito 5 y 6).
+
+### Nota importante. En caso de surgir el siguiente error
+
+D:\proyecto_abd>docker build -t proyecto-abd-final .
+
+[+] Building 0.3s (1/1) FINISHED                                                                   docker:desktop-linux
+
+ => [internal] load build definition from Dockerfile                                                               0.1s
+
+ => => transferring dockerfile: 2B                                                                                 0.0s
+
+ERROR: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
+
 
 
 
