@@ -31,8 +31,7 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 
 
 
-```md
-## 🛡️ b. Manejo de Seguridad
+# 🛡️ b. Manejo de Seguridad
 
 La arquitectura de seguridad del proyecto se basa en tres pilares para cumplir con los requerimientos académicos y las mejores prácticas de ingeniería de datos:
 
