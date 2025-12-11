@@ -34,7 +34,8 @@ Clona el repositorio y ejecuta:
 ```bash
 pip install -r requirements.txt
 
-## b. Manejo de Seguridad
+```md
+## 🛡️ b. Manejo de Seguridad
 
 La arquitectura de seguridad del proyecto se basa en tres pilares para cumplir con los requerimientos académicos y las mejores prácticas de ingeniería de datos:
 
