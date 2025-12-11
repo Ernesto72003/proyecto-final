@@ -28,6 +28,62 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 * **Python 3.9** o superior.
 * **PostgreSQL** (Local o Supabase).
 * **Docker Desktop** (Opcional, si se desea contenedorizar se recomienda esta opción como prioridad).
+Esta es la fomra recomendada para mover el ETL a QA o Producción, ya que esto nos garantiza que tengamos un entorno inmutable.
+Asegura que el entorno de ejecución sea identico en cualquier servidor.
+
+### Instlación de docker
+Antes de cualquier cosa instalaremos docker desde internet en la siguiente liga https://www.google.com/search?client=opera&q=docker&sourceid=opera&ie=UTF-8&oe=UTF-8&sei=p1A7aZLoEaGnqtsP54vf2As
+para usar el docker que necesitaremos mas adaelante.
+
+Empecemos con lo primeero que tenemos que crear una carpeta donde tenemos que clonar algunos archivos especificos de nuestro repositorio de github, los cuales son:
+### 1. app.py
+### 2. config.yaml
+### 3. dockerfile
+### 4. generar_datos.py
+### 5. main.py
+### 6. prueba.py.
+### 7. requirements.txt 
+
+Esto se puede clonar con un comando estandar en la cmd para pasar los archivos del repositorio a la carpeta creada anteriormente:
+
+git clone [URL_DEL_REPOSITORIO] [NOMBRE_DE_LA CARPETA]
+
+Buscamos en nuestro explorador de archivos la carpeta en la cual clonamos los archivos de nuestro repositorio de github y la seleccionamos, dentro de ella en la aparte de arriba debe decir algo
+como esto "D:\proyecto_abd" (donde se encuentra nuestra carpeta en el ordenador) borramos eso y ponemos cmd + enter; enseguida nos desplegara la terminal y dira algo como esto
+"D:\proyecto_abd>".
+
+Después construimos la imagen del docker con el siguiente comando:
+
+### D:\proyecto_abd>docker build -t proyecto_abd
+
+Ahora ejecutamos la imagen que acabamos de crear.
+
+### D:\proyecto_abd>docker run -d -p 8501:8501 --name etl-final proyecto_abd
+
+Ahora verificamos el estado del contenedor
+
+### D:\proyecto_abd>docker ps
+
+Accedemos a la interfaz gráfica (Streamlit).
+Abre tu navegador web y ve a la sigueinte dirección: https://localhost:8501.
+A partir de aquí, el profesor puede verificar todos los requisitos desde la interfaz:
+
+1. Login (Requisito 8: RBAC): Iniciar sesión como dev con la contraseña ABD123.
+
+2. Generación de Datos (Requisito 4): Usar el botón de generar datos para poblar la tabla fuente.
+
+3. Full Load: Ejecutar la carga completa (verifica Rendimiento/Batch Insert).
+
+4. Delta Load: Ejecutar la carga incremental (verifica Requisito 3).
+
+5. Inspector: Verificar que los datos en DESTINO están enmascarados (Requisito 2).
+
+6. Auditoría: Verificar que los logs se guardan correctamente (Requisito 5 y 6).
+
+
+
+
+
 
 
 
