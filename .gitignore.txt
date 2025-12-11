@@ -1,0 +1,14 @@
+# Archivos de configuración con contraseñas (IMPORTANTE)
+config.yaml
+
+# Archivos de estado y logs (Se generan al ejecutar, no se suben)
+state.json
+logs_historial.json
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Entornos virtuales (si usaras uno)
+venv/
+env/

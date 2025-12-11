@@ -1,0 +1,23 @@
+database:
+  source_url: "postgresql://postgres.amvqlrljrlvojbgpxfjk:contraseñaaqui@aws-1-us-east-2.pooler.supabase.com:6543/postgres"
+  target_url: "postgresql://postgres.amvqlrljrlvojbgpxfjk:contraseñaaqui@aws-1-us-east-2.pooler.supabase.com:6543/postgres"
+tablas:
+  - nombre: "clientes"
+    filtro_sql: "LIMIT 12000"  
+    columna_incremental: "id"
+    columnas_enmascarar:
+      nombre_completo: "faker_name"       
+      email: "hash_email"                 
+      tarjeta_credito: "redact_last4"     
+      telefono: "preserve_format"         
+
+  - nombre: "ordenes"
+    filtro_sql: "WHERE total > 12000"
+    columna_incremental: "id"
+    columnas_enmascarar: {}
+    
+  - nombre: "detalle_ordenes"  
+    filtro_sql: "WHERE orden_id IN (SELECT id FROM ordenes WHERE total > 12000)"   
+    columna_incremental: "id"
+    columnas_enmascarar: {}
+     

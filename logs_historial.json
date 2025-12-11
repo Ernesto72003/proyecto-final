@@ -1,0 +1,142 @@
+[
+    {
+        "execution_id": "c1f84b00-c3e0-4247-893c-b59691be9b7f",
+        "usuario": "operador",
+        "inicio": "2025-12-11 01:58:59.604793",
+        "fin": "2025-12-11 01:59:02.214887",
+        "total_registros_movidos": 3802,
+        "detalles_por_tabla": [
+            {
+                "tabla": "clientes",
+                "registros_leidos": 3802,
+                "registros_insertados": 3802,
+                "reglas_aplicadas": [
+                    "nombre_completo",
+                    "email",
+                    "tarjeta_credito",
+                    "telefono"
+                ],
+                "errores": []
+            },
+            {
+                "tabla": "ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            },
+            {
+                "tabla": "detalle_ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            }
+        ]
+    },
+    {
+        "execution_id": "57b333c6-7610-4c79-94e7-47e31d78d2e5",
+        "usuario": "dev",
+        "inicio": "2025-12-11 01:59:49.141015",
+        "fin": "2025-12-11 01:59:52.339080",
+        "total_registros_movidos": 3902,
+        "detalles_por_tabla": [
+            {
+                "tabla": "clientes",
+                "registros_leidos": 3902,
+                "registros_insertados": 3902,
+                "reglas_aplicadas": [
+                    "nombre_completo",
+                    "email",
+                    "tarjeta_credito",
+                    "telefono"
+                ],
+                "errores": []
+            },
+            {
+                "tabla": "ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            },
+            {
+                "tabla": "detalle_ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            }
+        ]
+    },
+    {
+        "execution_id": "eab76a13-b00d-4b17-a258-c0ebc623f700",
+        "usuario": "operador",
+        "inicio": "2025-12-11 02:13:42.787140",
+        "fin": "2025-12-11 02:13:44.243157",
+        "total_registros_movidos": 100,
+        "detalles_por_tabla": [
+            {
+                "tabla": "clientes",
+                "registros_leidos": 100,
+                "registros_insertados": 100,
+                "reglas_aplicadas": [
+                    "nombre_completo",
+                    "email",
+                    "tarjeta_credito",
+                    "telefono"
+                ],
+                "errores": []
+            },
+            {
+                "tabla": "ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            },
+            {
+                "tabla": "detalle_ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            }
+        ]
+    },
+    {
+        "execution_id": "028f1911-cf19-458e-a605-1e08ac5c67c8",
+        "usuario": "dev",
+        "inicio": "2025-12-11 02:14:29.397189",
+        "fin": "2025-12-11 02:14:32.847161",
+        "total_registros_movidos": 4102,
+        "detalles_por_tabla": [
+            {
+                "tabla": "clientes",
+                "registros_leidos": 4102,
+                "registros_insertados": 4102,
+                "reglas_aplicadas": [
+                    "nombre_completo",
+                    "email",
+                    "tarjeta_credito",
+                    "telefono"
+                ],
+                "errores": []
+            },
+            {
+                "tabla": "ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            },
+            {
+                "tabla": "detalle_ordenes",
+                "registros_leidos": 0,
+                "registros_insertados": 0,
+                "reglas_aplicadas": [],
+                "errores": []
+            }
+        ]
+    }
+]
