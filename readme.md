@@ -24,84 +24,89 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 
 ## 🛠️ a. Pasos de Instalación (Setup)
 
-### 1. Requisitos Previos
-* **Python 3.9** o superior.
-* **PostgreSQL** (Local o Supabase).
-* **Docker Desktop** (Opcional, si se desea contenedorizar se recomienda esta opción como prioridad).
-Esta es la fomra recomendada para mover el ETL a QA o Producción, ya que esto nos garantiza que tengamos un entorno inmutable.
-Asegura que el entorno de ejecución sea identico en cualquier servidor.
+### 1. Requisitos Previos y Preparación
+Antes de ejecutar el programa (sea con Docker o Python), asegúrese de tener configurada la base de datos y los archivos:
 
-### Instlación de docker
-Antes de cualquier cosa instalaremos docker desde internet en la siguiente liga https://www.google.com/search?client=opera&q=docker&sourceid=opera&ie=UTF-8&oe=UTF-8&sei=p1A7aZLoEaGnqtsP54vf2As para usar el docker que necesitaremos mas adaelante.
+1.  **Base de Datos:** Asegúrese de que las tablas destino existan en su PostgreSQL (Local o Supabase). Ejecute este SQL si aún no lo ha hecho:
+    ```sql
+    CREATE TABLE clientes_qa (id INT PRIMARY KEY, nombre_completo VARCHAR(150), email VARCHAR(150), telefono VARCHAR(100), tarjeta_credito VARCHAR(100), etl_batch_id VARCHAR(100));
+    CREATE TABLE ordenes_qa (id INT PRIMARY KEY, cliente_id INT, fecha_orden DATE, total DECIMAL(10,2), etl_batch_id VARCHAR(100));
+    CREATE TABLE detalle_ordenes_qa (id INT PRIMARY KEY, orden_id INT, producto VARCHAR(100), cantidad INT, etl_batch_id VARCHAR(100));
+    CREATE TABLE auditoria_logs (execution_id VARCHAR(100) PRIMARY KEY, fecha_inicio TIMESTAMP, fecha_fin TIMESTAMP, tablas_procesadas TEXT, total_registros INT, detalle_json TEXT);
+    ```
 
-Empecemos con lo primeero que tenemos que crear una carpeta donde tenemos que clonar algunos archivos especificos de nuestro repositorio de github, los cuales son:
-### 1. app.py
-### 2. config.yaml
-### 3. dockerfile
-### 4. generar_datos.py
-### 5. main.py
-### 6. prueba.py.
-### 7. requirements.txt 
+2.  **Archivos del Repositorio:** Clone el repositorio en una carpeta de su ordenador:
+    ```bash
+    git clone [URL_DEL_REPOSITORIO] proyecto_abd
+    ```
+    *Archivos clave:* `app.py`, `config.yaml`, `Dockerfile`, `generar_datos.py`, `main.py`, `requirements.txt`.
 
-Esto se puede clonar con un comando estandar en la cmd para pasar los archivos del repositorio a la carpeta creada anteriormente:
+3.  **Configuración:** Renombre `config.example.yaml` a `config.yaml` y coloque sus credenciales reales de base de datos.
 
-git clone [URL_DEL_REPOSITORIO] [NOMBRE_DE_LA CARPETA]
+---
 
-Buscamos en nuestro explorador de archivos la carpeta en la cual clonamos los archivos de nuestro repositorio de github y la seleccionamos, dentro de ella en la aparte de arriba debe decir algo
-como esto "D:\proyecto_abd" (donde se encuentra nuestra carpeta en el ordenador) borramos eso y ponemos cmd + enter; enseguida nos desplegara la terminal y dira algo como esto
-"D:\proyecto_abd>".
+### 2. Opciones de Ejecución
 
-Después construimos la imagen del docker con el siguiente comando:
+Puede elegir cualquiera de las dos opciones siguientes para iniciar el sistema:
 
-### D:\proyecto_abd>docker build -t proyecto_abd
+#### 🐳 Opción A: Ejecución con Docker (Recomendada)
+Esta es la forma recomendada para mover el ETL a QA o Producción, ya que esto nos garantiza que tengamos un entorno inmutable y asegura que el entorno de ejecución sea idéntico en cualquier servidor.
 
-Ahora ejecutamos la imagen que acabamos de crear.
+**Pasos:**
 
-### D:\proyecto_abd>docker run -d -p 8501:8501 --name etl-final proyecto_abd
+1.  **Instalación de Docker:** Si no lo tiene, instale Docker Desktop desde [aquí](https://www.docker.com/products/docker-desktop).
+2.  **Abrir Terminal:** Busque la carpeta clonada (ej. `D:\proyecto_abd`), borre la ruta en la barra superior, escriba `cmd` y pulse Enter.
+3.  **Construir Imagen:** Ejecute el siguiente comando:
+    ```bash
+    docker build -t proyecto_abd .
+    ```
+    *(Nota: No olvide el punto al final).*
+4.  **Ejecutar Contenedor:**
+    ```bash
+    docker run -d -p 8501:8501 --name etl-final proyecto_abd
+    ```
+5.  **Verificar estado (Opcional):**
+    ```bash
+    docker ps
+    ```
+6.  **Acceso:** Abra su navegador en [http://localhost:8501](http://localhost:8501).
 
-Ahora verificamos el estado del contenedor
+> **Nota importante:** En caso de surgir el error `failed to read dockerfile`, asegúrese de estar ubicado exactamente dentro de la carpeta del proyecto donde se encuentra el archivo `Dockerfile`.
 
-### D:\proyecto_abd>docker ps
+---
 
-Accedemos a la interfaz gráfica (Streamlit).
-Abre tu navegador web y ve a la sigueinte dirección: https://localhost:8501.
-A partir de aquí, el profesor puede verificar todos los requisitos desde la interfaz:
+#### 🐍 Opción B: Ejecución Local con Python (Alternativa)
+Si no desea usar Docker, puede ejecutar el sistema directamente en su ordenador siguiendo estos pasos sencillos:
 
-1. Login (Requisito 8: RBAC): Iniciar sesión como dev con la contraseña ABD123.
+1.  **Instalar Python:** Asegúrese de tener Python 3.9 o superior instalado.
+2.  **Abrir Terminal:** Abra una terminal (CMD o PowerShell) dentro de la carpeta del proyecto (`D:\proyecto_abd`).
+3.  **Instalar Dependencias:** Ejecute el siguiente comando para instalar las librerías necesarias:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  **Ejecutar Aplicación:** Inicie el dashboard con el comando:
+    ```bash
+    streamlit run app.py
+    ```
+5.  **Acceso:** El sistema abrirá automáticamente una pestaña en su navegador (generalmente `http://localhost:8501`).
 
-2. Generación de Datos (Requisito 4): Usar el botón de generar datos para poblar la tabla fuente.
+---
 
-3. Full Load: Ejecutar la carga completa (verifica Rendimiento/Batch Insert).
+### 3. Validación Funcional
+A partir de aquí, se pueden verificar todos los requisitos desde la interfaz gráfica:
 
-4. Delta Load: Ejecutar la carga incremental (verifica Requisito 3).
+1.  **Login (Requisito 8: RBAC):** Iniciar sesión como `dev` con la contraseña `ABD123`.
+2.  **Generación de Datos (Requisito 4):** Usar el botón de generar datos para poblar la tabla fuente.
+3.  **Full Load:** Ejecutar la carga completa (verifica Rendimiento/Batch Insert).
+4.  **Delta Load:** Ejecutar la carga incremental (verifica Requisito 3).
+5.  **Inspector:** Verificar en la pestaña 2 que los datos en DESTINO están enmascarados (Requisito 2).
+6.  **Auditoría:** Verificar en la pestaña 3 que los logs se guardan correctamente (Requisito 5 y 6).
 
-5. Inspector: Verificar que los datos en DESTINO están enmascarados (Requisito 2).
+---
 
-6. Auditoría: Verificar que los logs se guardan correctamente (Requisito 5 y 6).
+## 🛡️ b. Manejo de Seguridad
 
-### Nota importante. En caso de surgir el siguiente error
-
-D:\proyecto_abd>docker build -t proyecto-abd-final .
-
-[+] Building 0.3s (1/1) FINISHED                                                                   docker:desktop-linux
-
- => [internal] load build definition from Dockerfile                                                               0.1s
-
- => => transferring dockerfile: 2B                                                                                 0.0s
-
-ERROR: failed to build: failed to solve: failed to read dockerfile: open Dockerfile: no such file or directory
-
-
-
-
-
-
-
-
-
-# 🛡️ b. Manejo de Seguridad
-
-La arquitectura de seguridad del proyecto se basa en tres pilares para cumplir con los requerimientos académicos y las mejores prácticas de ingeniería de datos:
+La arquitectura de seguridad del proyecto se basa en tres pilares para cumplir con los requerimientos académicos y las mejores prácticas de la admistración de bases de datos.
 
 ### 1. Almacenamiento de Credenciales (Segregación)
 * **Separación de Código y Configuración:** Las credenciales de base de datos **NO** están expuestas dentro del código fuente (`main.py` o `app.py`).
@@ -120,4 +125,4 @@ El sistema implementa una capa de autenticación simulada en el Frontend (`app.p
 ### 3. Trazabilidad y Auditoría
 Cada operación genera un `execution_id` único (UUID) que garantiza el no repudio de las acciones. Este ID queda registrado en una **doble bitácora**:
 * **Local:** Archivo `logs_historial.json` para consulta inmediata.
-* **Remota:** Tabla inmutable `auditoria_logs` en PostgreSQL para análisis forense.
+* **Remota:** Tabla inmutable `auditoria_logs` en PostgreSQL para análisis.
