@@ -24,6 +24,7 @@ El sistema cuenta con una interfaz gráfica interactiva construida con **Streaml
 
 ## 🛠️ a. Pasos de Instalación (Setup)
 
+
 ### 1. Requisitos Previos y Preparación
 Antes de ejecutar el programa (sea con Docker o Python), asegúrese de tener configurada la base de datos y los archivos:
 
@@ -43,8 +44,23 @@ Antes de ejecutar el programa (sea con Docker o Python), asegúrese de tener con
 
 3.  **Configuración:** Renombre `config.example.yaml` a `config.yaml` y coloque sus credenciales reales de base de datos.
 
----
+Para que el sistema funcione, debe crear su propio archivo de configuración basándose en la plantilla:
+Localice el archivo config.example.yaml en la carpeta.
 
+Copie y pegue el archivo en la misma ubicación (Ctrl+C, Ctrl+V).
+
+Renombre la copia a config.yaml.
+
+Abra config.yaml y reemplace los valores de ejemplo con sus credenciales reales de PostgreSQL, que estan en la documentación del proyecto.
+
+```YAML
+
+Database:
+   source_url: "postgresql://postgres.amvqlrljrlvojbgpxfjk:CONTRASEÑAAQUI@aws-1-us-east-2.pooler.supabase.com:6543/postgres"
+   target_url: "postgresql://postgres.amvqlrljrlvojbgpxfjk:CONTRASEÑAAQUI@aws-1-us-east-2.pooler.supabase.com:6543/postgres"
+tablas:
+---
+```
 ### 2. Opciones de Ejecución
 
 Puede elegir cualquiera de las dos opciones siguientes para iniciar el sistema:
